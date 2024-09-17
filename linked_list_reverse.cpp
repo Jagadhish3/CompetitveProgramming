@@ -1,6 +1,6 @@
 #include<iostream>
 using namespace std;
-
+// comment
 struct node{
     int data;
     node* next;
