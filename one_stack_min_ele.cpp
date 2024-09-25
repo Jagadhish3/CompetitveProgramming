@@ -7,7 +7,7 @@ int mini = INT_MAX;
 void push1(int ele){
 
     s1.push(mini);
-    if(ele<mini){
+    if(ele<=mini){
         mini = ele;
     }
     s1.push(ele);
@@ -34,14 +34,16 @@ int min(){
 
 
 int main(){
-    push1(10);
-    push1(5);
-    push1(12);
     push1(2);
-    push1(1);
-    cout<<min()<<endl;
+    push1(2);
+    push1(2);
+    push1(2);
+    // push1(1);
+    // cout<<min()<<endl;
     pop1();
     pop1();
+    pop1();
+    // pop1();
     cout<<min()<<endl;
     
 
