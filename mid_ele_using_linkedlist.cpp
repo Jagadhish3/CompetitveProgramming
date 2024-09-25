@@ -5,9 +5,11 @@ struct Node{
     int data;
     Node* next;
     Node* prev;
-}*head = nullptr,* mid=nullptr;
+};
 
-int count;
+Node* head = nullptr;
+Node* mid = nullptr;
+int count = 0;
 
 Node* add(int data){
     Node* newnode = new Node;
@@ -19,74 +21,79 @@ Node* add(int data){
 
 void push(int val){
     Node* newnode = add(val);
-    if(head==nullptr){
+    if (head == nullptr) {
         head = newnode;
-
-    }else{
-       newnode->next = head;
-       head = newnode;
-       head->next->prev = newnode;
+        mid = newnode;  // Initialize mid to the first node
+    } else {
+        newnode->next = head;
+        head->prev = newnode;
+        head = newnode;
     }
     count++;
 
-    if(mid==nullptr){
-        mid=head;
-    }else{
-        if(count%2==0){
-            mid=mid->pre;
-        }
+    // Update mid
+    if (count % 2 == 0) {
+        mid = mid->prev;  // Move mid left when count is even
     }
 }
 
 void print(){
-    Node* curr = head, *prev = nullptr;
-    while(curr!=nullptr){
-        cout<<curr->data<<" ";
-        prev = curr;
-        curr=curr->next;
+    Node* curr = head;
+    cout << "List in forward direction: ";
+    while (curr != nullptr) {
+        cout << curr->data << " ";
+        curr = curr->next;
     }
-    curr = prev;
-    while(curr!=nullptr){
-        cout<<curr->data<<" ";
-        curr=curr->prev;
+
+    cout << "\nList in backward direction: ";
+    curr = mid;
+    while (curr != nullptr) {
+        cout << curr->data << " ";
+        curr = curr->prev;
     }
+    cout << endl;
 }
 
 void pop(){
-    if(head==nullptr){
-        cout<<"Underflow";
+    if (head == nullptr) {
+        cout << "Underflow\n";
         return;
     }
+
     Node* newnode = head;
     head = head->next;
 
-    if(head!=nullptr){
-        head->prev=nullptr;
+    if (head != nullptr) {
+        head->prev = nullptr;
     }
-    cout<<"popped element "<<newnode->data;
+    cout << "Popped element: " << newnode->data << endl;
     delete newnode;
     count--;
-    if(count%2==0){
-        mid=mid->next;
-    }
 
+    // Update mid
+    if (count % 2 == 0) {
+        mid = mid->next;  // Move mid right when count is even
+    }
 }
 
 int printmid(){
-    if(mid==nullptr){
+    if (mid == nullptr) {
         return -1;
     }
     return mid->data;
 }
 
-
 int main(){
-    Node* head = nullptr;
-    Node* mid = nullptr;
+    push(5);
+    push(3);
+    push(8);
 
-    push(head,mid,5);
-    push(head,mid,3);
-    push(head,mid,8);
-    Node* curr = head;
-    cout<<mid->data;
+    cout << "Middle element: " << printmid() << endl;
+    print();
+
+    pop();
+    cout << "Middle element: " << printmid() << endl;
+    print();
+
+    return 0;
 }
