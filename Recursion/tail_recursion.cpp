@@ -1,3 +1,4 @@
+//reccurence relation is at end in case of tail recursion
 #include<iostream>
 using namespace std;
 
@@ -7,6 +8,7 @@ void print(int n){
     }
 
     cout << n <<endl;
+    //reccurence relation
     print(n-1);
 }
 

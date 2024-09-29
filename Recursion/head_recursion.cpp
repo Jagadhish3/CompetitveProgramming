@@ -1,3 +1,4 @@
+//reccurence relation is at middle in case of head recursion
 #include<iostream>
 using namespace std;
 
