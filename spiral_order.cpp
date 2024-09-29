@@ -31,7 +31,7 @@ int main(){
             }
             right--;
             if(top<=bottom){
-            for(int i=right;i>=left;i++){
+            for(int i=right;i>=left;i--){
                 res[index]=arr[bottom][i];
                 index++;
             }
