@@ -2,40 +2,23 @@
 #include<vector>
 using namespace std;
 
-void remove(vector<int>& V, int step) {
-    if (step >= V.size()) {
-        return;
+
+bool luckyhelp(int num,int n){
+    if(n>num){
+        return true;
     }
 
-    for (int i = step - 1; i < V.size(); i += step) {
-        V.erase(V.begin() + i);
-        i--;
-    }
-
-    remove(V, step + 1);
-}
-
-bool islucky(int num) {
-    if (num % 2 == 0) {
+    if(num%n==0){
         return false;
     }
 
-    vector<int> vec;
-    for (int i = 1; i <= num; i++) {
-        vec.push_back(i);
-    }
+    int numm = num - num/n;
 
-    remove(vec, 2);
-
-    for (int i = 0; i < vec.size(); i++) {
-        if (vec[i] == num) {
-            return true;
-        }
-    }
-
-    return false;
+    luckyhelp(numm,n+1);
 }
-
+bool islucky(int num){
+    return luckyhelp(num,2);
+}
 int main() {
     int number;
     cout << "Enter a number to check if it's lucky: ";

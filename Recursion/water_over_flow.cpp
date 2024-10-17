@@ -1,32 +1,40 @@
 #include <iostream>
+#include <iomanip> // for setting precision
 using namespace std;
 
-double pourwater(double water, int r, int c) {
-    if (r == 0 && c == 0) 
-    {
-        return min(water, 1.0);  
+// Recursive function to find the amount of water in the (R, C) glass
+double findWater(int K, int R, int C) {
+    // Base cases
+    if (C > R || C < 1) {
+        return 0;  // Glass doesn't exist
+    }
+    if (R == 1 && C == 1) {
+        return K;  // Top glass gets all the poured water initially
     }
 
-    if (c < 0 || c > r) 
-    {
-        return 0; 
-    }
+    // Get water from the two glasses above
+    double leftParent = (findWater(K, R - 1, C - 1) - 1) / 2.0;
+    double rightParent = (findWater(K, R - 1, C) - 1) / 2.0;
 
-     if (water > 1.0) {
-        double extra = water - 1.0;  
-        return 1.0 + pourwater(extra / 2.0, r - 1, c - 1) + pourwater(extra / 2.0, r, c - 1);
-    }
-    
-    return water;  
+    // If a parent glass has less than 1 unit, it can't overflow
+    if (leftParent < 0) leftParent = 0;
+    if (rightParent < 0) rightParent = 0;
+
+    // Total water in the current glass
+    return leftParent + rightParent;
 }
 
- int main() {
-    double waterAmount = 2.0;  
-    int row = 1;  
-    int column = 1;  
+double waterOverflow(int K, int R, int C) {
+    // Use recursion to get the water amount in the Cth glass of Rth row
+    double water = findWater(K, R, C);
 
-    double result = pourwater(waterAmount, row, column);  
-    cout << "Total water at row " << row << ", column " << column << ": " << result << endl;
+    // Water in each glass is capped at 1 unit
+    return min(1.0, water);
+}
 
-    return 0;  
+int main() {
+    int K = 8, R = 3, C = 3;
+    cout << fixed << setprecision(6) << waterOverflow(K, R, C) << endl;
+    return 0;
+
 }
