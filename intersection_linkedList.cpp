@@ -42,13 +42,11 @@ node* find_intersection(node* headA,node* headB){
                 tempB=tempB->next;
             }
         }
-
         while(tempA!=tempB){
             tempA = tempA->next;
             tempB = tempB->next;
         }
     return tempA;
-
 }
 
 int main(){

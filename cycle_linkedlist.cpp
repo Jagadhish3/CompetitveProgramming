@@ -67,7 +67,6 @@ node* checkcycle(){
         if(slow==fast){
             hascycle=true;
             break;
-
         }
     }
     if(hascycle==false){

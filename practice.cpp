@@ -258,7 +258,7 @@ int main(){
     cout<<y<<" is peek element";
 }
 */
-
+/*
 struct Node {
     int data;      // Data part of the node
     Node* next;    // Pointer to the next node
@@ -374,3 +374,71 @@ int main() {
 
     return 0;
 }
+*/
+
+struct node{
+    int data;
+    node* next;
+
+    node(int val){
+        data=val;
+        next=nullptr;
+    }
+}*head = nullptr;
+
+node* push(int ele){
+    node *newnode = new node(ele);
+
+    if(head==nullptr){
+        head=newnode;
+        return newnode;
+    }else{
+        node *temp=head;
+        while(temp->next!=nullptr){
+            temp=temp->next;
+        }
+        temp->next=newnode;
+    }
+    return newnode;
+}
+
+void display(node* head){
+    node* temp=head;
+    while(temp!=nullptr){
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }
+}
+
+node* remove(node* head,int n){
+
+    node* temp=new node(-1);
+    temp->next=head;
+    node* slow=temp;
+    node* fast=temp;
+    int c=0;
+    while(c<=n){
+        fast=fast->next;
+        c++;
+    }
+
+    while(fast!=nullptr){
+        slow=slow->next;
+        fast=fast->next;
+    }
+
+    slow->next = slow->next->next;
+    return temp->next;
+}
+
+int main(){
+    push(1);
+    push(2);
+    push(3);
+    push(4);
+    push(5);
+    push(6);
+    remove(head,2);
+    display(head);
+}
+

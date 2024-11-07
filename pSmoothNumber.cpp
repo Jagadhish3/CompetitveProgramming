@@ -2,7 +2,7 @@
 using namespace std;
 
 int main(){
-    int num = 14;
+    int num = 2;
     
     if(num%2==0){
     while(num%2==0){

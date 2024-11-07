@@ -25,6 +25,6 @@ int minPartition(int N)
         return dp[3][N];
     }
 int main(){
-    int x = minPartition(11);
+    int x = minPartition(12);
     cout<<x;
 }
