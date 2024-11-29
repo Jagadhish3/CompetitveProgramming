@@ -1,66 +1,58 @@
-// C++ program for implementation
-// of Sieve of Atkin
-#include <bits/stdc++.h>
+#include<iostream>
 using namespace std;
 
-// Function to generate primes
-// till limit using Sieve of Atkin 
-void SieveOfAtkin(int limit)
-{
-	// Initialise the sieve array
-	// with initial false values
-	bool sieve[limit];
-	for (int i = 0; i <= limit; i++)
-		sieve[i] = false;
+void sieveofatkins(int num){
+	bool sieve[num+1];
+	
+	for(int i=0;i<=num;i++){
+		sieve[i]=false;
+	}
 
-	// 2 and 3 are known to be prime
-	if (limit > 2)
-		sieve[2] = true;
-	if (limit > 3)
-		sieve[3] = true;
+	if(num>2){
+		sieve[2]=true;
+	}
+	if(num>3){
+		sieve[3]=true;
+	}
 
-	for (int x = 1; x * x <= limit; x++) {
-		for (int y = 1; y * y <= limit; y++) {
 
-			// Condition 1
-			int n = (4 * x * x) + (y * y);
-			if (n <= limit 
-				&& (n % 12 == 1 || n % 12 == 5))
-				sieve[n] = true;
+	for(int x=1;x*x<=num;x++){
+		for(int y=1;y*y<=num;y++){
+			int n=(4*x*x)+(y*y);
 
-			// Condition 2
-			n = (3 * x * x) + (y * y);
-			if (n <= limit && n % 12 == 7)
-				sieve[n] = true;
+			if(n<=num && n%12==1||n%12==5){
+				sieve[n]=true;
+			}
 
-			// Condition 3
-			n = (3 * x * x) - (y * y);
-			if (x > y && n <= limit 
-				&& n % 12 == 11)
-				sieve[n] = true;
+			n=(3*x*x)+(y*y);
+			if(n<=num && n%12==7){
+				sieve[n]=true;
+			}
+
+			n=(3*x*x)-(y*y);
+			if(x<y && n<=num && n%12==11){
+				sieve[n]=true;
+			}
 		}
 	}
 
-	// Mark all multiples
-	// of squares as non-prime
-	for (int r = 5; r * r <= limit; r++) {
-		if (sieve[r]) {
-			for (int i = r * r; i <= limit; i += r * r)
-				sieve[i] = false;
+	for(int i=5;i*i<=num;i++){
+		if(sieve[i]){
+			for(int j=i*i;j<=num;j+=i*i){
+				sieve[j]=false;
+			}
 		}
 	}
-
-	// Print primes using sieve[]
-	for (int a = 1; a <= limit; a++)
-		if (sieve[a])
-			cout << a << " ";
-	cout << "\n";
+	for(int i=1;i<=num;i++){
+		if(sieve[i]){
+			cout<<i<<" ";
+		}
+	}
 }
 
-// Driver program
-int main(void)
-{
-	int limit = 31;
-	SieveOfAtkin(limit);
-	return 0;
+int main(){
+	int n;
+	cin>>n;
+
+	sieveofatkins(n);
 }
