@@ -23,6 +23,14 @@ bool ishappy(int num){
 
     return first==1;
 }
+int next_happy_number(int n) {
+    n++; 
+    while (!ishappy(n)) {
+        n++;
+    }
+    return n;
+}
+
 
 int main(){
     int n;
