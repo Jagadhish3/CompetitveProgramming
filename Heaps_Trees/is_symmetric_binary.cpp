@@ -15,7 +15,14 @@ Node* add(int val){
 
     return newnode;
 }
+bool dfs(Node* left,Node* right){
+    if(left==NULL && right==NULL) return true;
+    if(left==NULL || right==NULL) return false;
 
+    if(left->data!=right->data) return false;
+    return dfs(left->left,right->right)&&dfs(left->right,right->left);
+
+}
 
 void bfs(Node* root){
     
@@ -60,7 +67,11 @@ int main(){
     root->left->right=add(4);
     root->right->left=add(4);
     
-    bfs(root);
+    if(dfs(root->left,root->right)){
+        cout<<"True";
+    }else{
+        cout<<"False";
+    }
     
 }
 

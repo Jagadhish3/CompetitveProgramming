@@ -8,7 +8,6 @@ struct TreeNode{
     
 };
 
-// TreeNode *prev = NULL;
 
 TreeNode* TreeeNode(int val){
     TreeNode* newNode = new TreeNode();
@@ -33,46 +32,15 @@ void iterative_inorder(TreeNode* root){
     root=root->right;
     }
 }
-// bool isBst(TreeNode* root){
-//     stack<TreeNode*> s;
-//     while(root!=NULL || !s.empty()){
-//         while(root!=NULL){
-//         s.push(root);
-//         root=root->left;
-//         }
 
-//     root=s.top();
-//     s.pop();
-//     if(prev!=NULL && prev->val>=root->val){
-//         return false;
-//     }
-//     prev = root;
-//     root=root->right;
-//     }
-// }
+void inorderdfs(TreeNode* root){
+    if(root==NULL) return;
 
-bool isbst(TreeNode* root,int maxi, int mini){
-    if(root==NULL){
-        return true;
-    }
-    if(root->val<mini || root->val>maxi) return false;
-
-    return isbst(root->left,root->val,mini)&&isbst(root->right,maxi,root->val);
-}
-
-
-
-
-void inorder(TreeNode* root){
-    if(root==NULL){
-        return;
-    }
-
-    inorder(root->left);
+    inorderdfs(root->left);
     cout<<root->val<<" ";
-    inorder(root->right);
-    // cout<<root->val<<"END"<<endl;
+    inorderdfs(root->right);
 }
+
 int main(){
     TreeNode* root =TreeeNode(50);
     root->left =TreeeNode(40);
@@ -82,13 +50,8 @@ int main(){
     root->left->right->left =TreeeNode(40);
     root->right->right =TreeeNode(65);
 
-    int maxi = INT8_MAX;
-    int mini = INT8_MIN;
-    bool res = isbst(root,maxi,mini);
-
-    cout<<res;
-    // inorder(root);
-    // cout<<endl;
-    // iterative_inorder(root);
+    inorderdfs(root);
+    cout<<endl;
+    iterative_inorder(root);
 
 }
