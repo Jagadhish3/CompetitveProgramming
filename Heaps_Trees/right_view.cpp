@@ -44,20 +44,21 @@ void rightview(Node* root){
     }
 }
 
-// void dfs_rightview(Node* root,int i,vector<int>& v){
-//     if(root==NULL){
-//         return;
-//     }
+void dfs_rightview(Node* root,int i,vector<int>& v){
+    if(root==NULL){
+        return;
+    }
 
-//     if(i==v.size()){
-//         v.push_back(root->data);
-//     }else{
-//         v[i]=root->data;
-//     }
-//     dfs_rightview(root->left,i++,v);
-//     dfs_rightview(root->right,i++,v);
+    if(i==v.size()){
+        v.push_back(root->data);
+    }
+    // else{
+    //     v[i]=root->data;
+    // }
+    dfs_rightview(root->right,++i,v);
+    dfs_rightview(root->left,++i,v);
 
-// }
+}
 
 int main(){
     Node* root=add(5);
@@ -67,10 +68,10 @@ int main(){
     root->right->right=add(8);
     vector<int> v;
 
-    rightview(root);
-    // dfs_rightview(root,0,v);
-    // for(int i:v){
-    //    cout<<i<<" ";
-    // }
+    // rightview(root);
+    dfs_rightview(root,0,v);
+    for(int i:v){
+       cout<<i<<" ";
+    }
     
 }

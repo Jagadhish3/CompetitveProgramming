@@ -7,11 +7,11 @@ struct node{
     node* right;
 };
 
-
 node* add(int val){
     node* newnode = new node();
     newnode->data=val;
     newnode->left=newnode->right=NULL;
+    return newnode;
 }
 
 node* level(){
@@ -43,8 +43,25 @@ node* level(){
     }
     return newnode;
 }
-
-
+// Node *lca(Node *root, int v1,int v2) {
+    
+//     if(root==NULL || root->data==v1 || root->data==v2){
+//         return root;
+//     }
+    
+//     Node* left = lca(root->left,v1,v2);
+//     Node* right = lca(root->right,v1,v2);
+    
+//     if(left==NULL){
+//         return right;
+//     }
+//     else if(right==NULL){
+//         return left;
+//     }
+    
+//         return root;
+    
+// }
 node* lca(node* root, node* n1,node* n2){
     if(root==NULL) return root;
     if(root->data>n1->data && root->data>n2->data){

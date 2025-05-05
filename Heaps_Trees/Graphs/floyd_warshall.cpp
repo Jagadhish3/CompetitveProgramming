@@ -19,7 +19,7 @@ void floyd(vector<vector<int>> &graph,int v){
 int main(){
     int v;
     cin>>v;
-    vector<vector<int>> graph(v,vector<int>(v,INT16_MIN));
+    vector<vector<int>> graph(v,vector<int>(v,INT16_MAX));
     int edges;
     cin>>edges;
         for(int j=0;j<edges;j++){

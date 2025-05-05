@@ -48,9 +48,9 @@ node* build(){
 void postorder(node* root){
     if(root==NULL) return;
 
-    cout<<root->data<<" ";
     postorder(root->left);
     postorder(root->right);
+    cout<<root->data<<" ";
 }
 
 void postorderbfs(node* root){
@@ -73,9 +73,23 @@ void postorderbfs(node* root){
         s2.pop();
     }
 }
+void right_view(node* root){
+    if(root==NULL){
+        return;
+    }
+
+    if(root->right){
+        cout<<root->data<<" ";
+        right_view(root->right);
+    }else if(root->left){
+        cout<<root->data<<" ";
+        right_view(root->left);
+    }
+}
 
 
 int main(){
     node* root=build();
-    postorderbfs(root);
+    // postorder(root);
+    right_view(root);
 }
